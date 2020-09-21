@@ -10,7 +10,6 @@ import { HomeView } from '../views/HomeView'
 import { LoginView } from '../views/LoginView'
 
 export interface IPrivateRouteProps extends RouteProps {
-  isAuth: boolean
   redirectPath?: string
 }
 
@@ -33,7 +32,7 @@ const Routes = () => (
   <BrowserRouter>
       <Switch> 
           <Route exact path="/" component={LoginView} />
-          <PrivateRoute path="/dashboard" component={HomeView} isAuth={true}/>
+          <PrivateRoute path="/dashboard" component={HomeView} />
       </Switch>
   </BrowserRouter>
 );

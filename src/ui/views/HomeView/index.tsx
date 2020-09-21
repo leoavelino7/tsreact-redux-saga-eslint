@@ -5,6 +5,8 @@ import { ApplicationState } from '../../../data/store'
 
 import * as AuthActions from '../../../data/store/ducks/auth/actions'
 
+import { Sample } from '../../components/Sample'
+
 export const HomeView = () => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -18,6 +20,8 @@ export const HomeView = () => {
 
   return (
     <div>
+      <Sample />
+      <br/>
       <br />
       <h1>Token {token}</h1>
       <br/>
