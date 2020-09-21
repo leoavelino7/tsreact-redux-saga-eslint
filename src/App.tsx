@@ -1,16 +1,14 @@
 import React from 'react';
-
-import { LoginView } from './ui/views/LoginView'
-
 import { Provider } from 'react-redux'
+
 import store from './data/store'
-import { HomeView } from './ui/views/HomeView';
+
+import Routes from './ui/routes';
 
 function App() {
   return (
     <Provider store={store}>
-      <LoginView />
-      <HomeView />
+      <Routes />
     </Provider>
   )
 }

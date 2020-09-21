@@ -6,13 +6,13 @@ import { loadSuccess, loadFailure, signOut } from './actions'
  * Mocks
  */
 function mockSignIn() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => resolve({data: {token: 'wertyuiop'}}), 2000)
   })
 }
 
 function mockCheckToken() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => resolve({data: {valid: true }}), 1000)
   })
 }
@@ -32,7 +32,11 @@ export function* signIn() {
 
 export function* validateToken() {
   try {
-    yield call(mockCheckToken)
+    const response = yield call(mockCheckToken)
+
+    if(!response?.data?.valid) {
+      throw new Error('Invalid token')
+    }
   } catch (err) {
     yield put(signOut())
   }

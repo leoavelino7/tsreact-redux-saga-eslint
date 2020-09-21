@@ -2,11 +2,12 @@
  * Action types
  */
 export enum AuthTypes {
-  'SIGN_IN' = '@auth/SIGN_IN',
-  'SIGN_OUT' = '@auth/SIGN_OUT',
-  'VALIDATE_TOKEN' = '@auth/VALIDATE_TOKEN',
-  'LOAD_SUCCESS' = '@auth/LOAD_SUCCESS',
-  'LOAD_FAILURE' = '@auth/LOAD_FAILURE',
+  SIGN_IN = '@auth/SIGN_IN',
+  SIGN_OUT = '@auth/SIGN_OUT',
+  VALIDATE_TOKEN = '@auth/VALIDATE_TOKEN',
+  LOAD_SUCCESS = '@auth/LOAD_SUCCESS',
+  LOAD_FAILURE = '@auth/LOAD_FAILURE',
+  TOKEN_STORAGE = '@auth/TOKEN_STORAGE'
 }
 
 /**
@@ -19,6 +20,10 @@ export interface Auth {
 
 export interface AuthSuccess {
   token: string
+}
+
+export interface AuthValidateToken {
+  valid: boolean
 }
 
 /**

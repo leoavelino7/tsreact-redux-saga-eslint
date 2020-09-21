@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { ApplicationState } from '../../../data/store'
 
 import * as AuthActions from '../../../data/store/ducks/auth/actions'
 
 export const LoginView = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
+
   const isLoading = useSelector((state: ApplicationState) => state.auth.loading)
   const error = useSelector((state: ApplicationState) => state.auth.error)
   const token = useSelector((state: ApplicationState) => state.auth.token)
@@ -20,9 +23,9 @@ export const LoginView = () => {
 
   useEffect(() => {
     if(token){
-      console.log('Novo token:', token);
+      history.push('/dashboard')
     }
-  }, [token])
+  }, [history, token])
 
   return (
     <div>
