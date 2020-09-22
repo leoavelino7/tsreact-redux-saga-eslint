@@ -1,26 +1,16 @@
 import React, { useContext } from 'react';
+import { Button } from '@material-ui/core'
 
-import { ThemeContext } from '../../providers/ThemeProvider';
+import { CustomThemeContext } from '../../providers/CustomThemeProvider';
 
 export function ThemeButton(){
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { currentTheme, setTheme } = useContext(CustomThemeContext)
 
-  function swapTheme() {
-    console.log("ola", theme);
-    
-    if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-
-    console.log(theme);
-    
-  };
-
+  const handleToogleTheme = () => {
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark')
+  }
+  
   return (
-    <button onClick={swapTheme}>
-      {theme === 'light' ? 'Change to dark mode' : 'Change to light mode'}
-    </button>
+    <Button variant="contained" color="secondary" onClick={handleToogleTheme}>Thema atual - {currentTheme}</Button>
   );
 }

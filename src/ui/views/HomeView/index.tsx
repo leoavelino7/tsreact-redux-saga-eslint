@@ -12,13 +12,17 @@ export const HomeView = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const token = useSelector((state: ApplicationState) => state.auth.token)
+  const token = useSelector((state: ApplicationState) => {
+    console.log(state);
+    
+    return state.auth.token
+  })
 
   function handleSignOut() {
     dispatch(AuthActions.signOut())
     history.push('/')
   }
-
+  
   return (
     <div>
       <ThemeButton />
