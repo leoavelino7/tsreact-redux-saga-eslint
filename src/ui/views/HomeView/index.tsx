@@ -6,6 +6,7 @@ import { ApplicationState } from '../../../data/store'
 import * as AuthActions from '../../../data/store/ducks/auth/actions'
 
 import { Sample } from '../../components/Sample'
+import { ThemeButton } from '../../components/ThemeButton'
 
 export const HomeView = () => {
   const dispatch = useDispatch()
@@ -20,6 +21,7 @@ export const HomeView = () => {
 
   return (
     <div>
+      <ThemeButton />
       <Sample />
       <br/>
       <br />
