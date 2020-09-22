@@ -9,6 +9,11 @@ import { ApplicationState } from '../../data/store'
 import { HomeView } from '../views/HomeView'
 import { LoginView } from '../views/LoginView'
 
+export interface IRouteProps extends RouteProps {
+  changeLanguage: Function
+  redirectPath?: string
+}
+
 export interface IPrivateRouteProps extends RouteProps {
   redirectPath?: string
 }
@@ -28,11 +33,11 @@ const PrivateRoute: React.FC<IPrivateRouteProps> = (props) => {
   )
 }
 
-const Routes = () => (
+const Routes: React.FC<IRouteProps> = ({changeLanguage}) => (
   <BrowserRouter>
       <Switch> 
-          <Route exact path="/" component={LoginView} />
-          <PrivateRoute path="/dashboard" component={HomeView} />
+          <Route exact path="/" component={(props: RouteProps) => <LoginView {...props} changeLanguage={changeLanguage} />} />
+          <PrivateRoute path="/dashboard" component={(props: RouteProps) => <HomeView {...props} changeLanguage={changeLanguage} />} />
       </Switch>
   </BrowserRouter>
 );

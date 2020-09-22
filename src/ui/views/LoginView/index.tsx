@@ -5,7 +5,9 @@ import { ApplicationState } from '../../../data/store'
 
 import * as AuthActions from '../../../data/store/ducks/auth/actions'
 
-export const LoginView = () => {
+import { IRouteProps } from '../../routes'
+
+export const LoginView: React.FC<IRouteProps> = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
