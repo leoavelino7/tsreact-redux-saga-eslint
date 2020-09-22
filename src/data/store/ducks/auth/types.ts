@@ -7,7 +7,8 @@ export enum AuthTypes {
   VALIDATE_TOKEN = '@auth/VALIDATE_TOKEN',
   LOAD_SUCCESS = '@auth/LOAD_SUCCESS',
   LOAD_FAILURE = '@auth/LOAD_FAILURE',
-  TOKEN_STORAGE = '@auth/TOKEN_STORAGE'
+  TOKEN_STORAGE = '@auth/TOKEN_STORAGE',
+  PERMISSIONS = '@auth/PERMISSIONS'
 }
 
 /**
@@ -26,6 +27,16 @@ export interface AuthValidateToken {
   valid: boolean
 }
 
+export interface AuthPermissions {
+  configurations: {
+    service: string
+    rules: {
+      role: string
+      rights: string[]
+    } 
+  }[]
+}
+
 /**
  * State type
  */
@@ -34,6 +45,7 @@ export interface AuthState {
   password: string
   readonly token: string
   readonly valid: boolean
+  readonly configurations: Array<Object>
   readonly loading: boolean
   readonly error: boolean
 }

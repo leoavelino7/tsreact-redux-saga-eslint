@@ -7,7 +7,14 @@ import { loadSuccess, loadFailure, signOut } from './actions'
  */
 function mockSignIn() {
   return new Promise((resolve) => {
-    setTimeout(() => resolve({data: {token: 'wertyuiop'}}), 2000)
+    setTimeout(() => resolve({
+      data: {
+        token: 'wertyuiop', 
+        configurations: [
+          { service: 'App1', rules: [{role: 'admin', rights: ['CAN_VIEW_HOME']}]}
+        ]
+      }
+    }), 2000)
   })
 }
 

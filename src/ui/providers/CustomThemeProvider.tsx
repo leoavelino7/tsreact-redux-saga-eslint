@@ -22,7 +22,7 @@ interface Props {
 }
 
 const CustomThemeProvider = ({ children }: Props) => {
-  const [themeName, setThemeName] = useLocalStorage('appTheme', 'light')
+  const [themeName, setThemeName] = useLocalStorage('@app/theme', 'light')
   
   const configTheme = useTheme(themeName)
 
