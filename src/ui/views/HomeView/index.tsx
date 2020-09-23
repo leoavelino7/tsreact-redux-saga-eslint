@@ -1,3 +1,5 @@
+import dotenv from 'dotenv'
+
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -10,14 +12,19 @@ import { Sample } from '../../components/Sample'
 import { ThemeButton } from '../../components/ThemeButton'
 
 import { IRouteProps } from '../../routes'
+import { decryptionWithCryptoJS } from '../../../data/services/CryptoService/Aes'
+
+dotenv.config({
+  path: process.env.NODE_ENV === 'test' ? '.env.testing' : '.env'
+})
 
 export const HomeView = ({ changeLanguage }: IRouteProps) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const intl = useIntl()
 
-  const token = useSelector((state: ApplicationState) => state.auth.token)
-
+  const token = useSelector((state: ApplicationState) => decryptionWithCryptoJS(process.env.REACT_APP_STORAGE_KEY, state.auth.token))
+  
   function handleSignOut() {
     dispatch(AuthActions.signOut())
     history.push('/')

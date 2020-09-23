@@ -1,12 +1,20 @@
+import dotenv from 'dotenv'
 import { Reducer } from 'redux'
+import { encryptWithCryptoJS } from '../../../services/CryptoService/Aes'
 import { AuthState, AuthTypes } from './types'
+
+dotenv.config({
+  path: process.env.NODE_ENV === 'development' ? '.env.testing' : '.env'
+})
+
+const {REACT_APP_STORAGE_KEY} = process.env
 
 const INITIAL_STATE: AuthState = {
   username: '',
   password: '',
   token: window.localStorage.getItem(AuthTypes.TOKEN_STORAGE) || '',
   valid: false,
-  configurations: [],
+  configurations: '',
   loading: false,
   error: false
 }
@@ -19,15 +27,17 @@ const reducer: Reducer<AuthState> = (state = INITIAL_STATE, action) => {
     case AuthTypes.SIGN_OUT:
       window.localStorage.removeItem(AuthTypes.TOKEN_STORAGE)
       window.localStorage.removeItem(AuthTypes.PERMISSIONS)
-      return {...state, username: '', password: '', token: '', valid: false, configurations: [], loading: false, error: false};
+      return {...state, username: '', password: '', token: '', valid: false, configurations: '', loading: false, error: false};
 
     case AuthTypes.VALIDATE_TOKEN:
       return {...state, loading: false, valid: true}
 
     case AuthTypes.LOAD_SUCCESS:
-      window.localStorage.setItem(AuthTypes.TOKEN_STORAGE, action.payload.token)
-      window.localStorage.setItem(AuthTypes.PERMISSIONS, JSON.stringify(action.payload.configurations))
-      return {...state, loading: false, error: false, valid: true, token: action.payload.token, configurations: action.payload.configurations}
+      const token = encryptWithCryptoJS(REACT_APP_STORAGE_KEY, action.payload.token)
+      const configurations = encryptWithCryptoJS(REACT_APP_STORAGE_KEY, JSON.stringify(action.payload.configurations))
+      window.localStorage.setItem(AuthTypes.TOKEN_STORAGE, token)
+      window.localStorage.setItem(AuthTypes.PERMISSIONS, configurations)
+      return {...state, loading: false, error: false, valid: true, token, configurations}
 
     case AuthTypes.LOAD_FAILURE:
       return {...state, loading: false, error: true }

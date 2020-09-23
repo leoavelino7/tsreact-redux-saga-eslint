@@ -45,7 +45,7 @@ export interface AuthState {
   password: string
   readonly token: string
   readonly valid: boolean
-  readonly configurations: Array<Object>
+  readonly configurations: string
   readonly loading: boolean
   readonly error: boolean
 }
