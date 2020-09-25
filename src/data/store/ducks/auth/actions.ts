@@ -1,5 +1,6 @@
 import { action } from 'typesafe-actions'
-import { AuthTypes, Auth, AuthSuccess } from './types'
+
+import { Auth, AuthSuccess, AuthTypes } from './types'
 
 export const signIn = (data: Auth) => action(AuthTypes.SIGN_IN, data)
 

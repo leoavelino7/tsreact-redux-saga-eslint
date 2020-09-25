@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { ApplicationState } from '../../../data/store'
 
-import * as AuthActions from '../../../data/store/ducks/auth/actions'
+import { ApplicationState } from '~/data/store'
+import * as AuthActions from '~/data/store/ducks/auth/actions'
 
-import { IRouteProps } from '../../routes'
+import { IRouteProps } from '~/ui/routes'
 
 export const LoginView: React.FC<IRouteProps> = () => {
   const dispatch = useDispatch()
@@ -20,11 +20,11 @@ export const LoginView: React.FC<IRouteProps> = () => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    dispatch(AuthActions.signIn({username, password}))
+    dispatch(AuthActions.signIn({ username, password }))
   }
 
   useEffect(() => {
-    if(token){
+    if (token) {
       history.push('/dashboard')
     }
   }, [history, token])

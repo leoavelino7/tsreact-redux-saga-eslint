@@ -1,51 +1,50 @@
 import React, { createContext } from 'react'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
-import { useLocalStorage } from '../../data/hooks/useLocalStorage'
-import { useTheme } from '../../data/hooks/useTheme'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { MuiThemeProvider, createMuiTheme, Theme } from '@material-ui/core/styles'
+
+import { useLocalStorage } from '~/data/hooks/useLocalStorage'
+import { useTheme } from '~/data/hooks/useTheme'
 
 interface ContextProps {
   currentTheme: string
-  setTheme: Function
-  configTheme: any
+  setTheme(theme: string): void
+  configTheme: Theme
 }
 
 export const CustomThemeContext = createContext<ContextProps>({
   currentTheme: 'light',
   configTheme: useTheme('light'),
-  setTheme: () =>  null
+  setTheme: () => true,
 })
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const CustomThemeProvider = ({ children }: Props) => {
   const [themeName, setThemeName] = useLocalStorage('@app/theme', 'light')
-  
+
   const configTheme = useTheme(themeName)
 
   const contextValue = {
     currentTheme: themeName,
     setTheme: setThemeName,
-    configTheme
+    configTheme,
   }
 
-  const theme = React.useMemo(
-    () =>
-      createMuiTheme({
-        ...configTheme
-      }),
-    [configTheme],
-  );
+  const theme = React.useMemo(() => {
+    return createMuiTheme({
+      ...configTheme,
+    })
+  }, [configTheme])
 
   return (
     <CustomThemeContext.Provider value={contextValue}>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          {children}
-        </MuiThemeProvider>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MuiThemeProvider>
     </CustomThemeContext.Provider>
   )
 }

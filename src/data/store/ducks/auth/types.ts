@@ -8,7 +8,7 @@ export enum AuthTypes {
   LOAD_SUCCESS = '@auth/LOAD_SUCCESS',
   LOAD_FAILURE = '@auth/LOAD_FAILURE',
   TOKEN_STORAGE = '@auth/TOKEN_STORAGE',
-  PERMISSIONS = '@auth/PERMISSIONS'
+  PERMISSIONS = '@auth/PERMISSIONS',
 }
 
 /**
@@ -33,7 +33,7 @@ export interface AuthPermissions {
     rules: {
       role: string
       rights: string[]
-    } 
+    }
   }[]
 }
 

@@ -1,7 +1,7 @@
-import { createGlobalStyle, css } from "styled-components";
+import { createGlobalStyle, css } from 'styled-components'
 
 interface Props {
-  theme: string;
+  theme: string
 }
 
 export const GlobalStyles = createGlobalStyle(
@@ -12,12 +12,8 @@ export const GlobalStyles = createGlobalStyle(
     }
 
     body {
-      background-color: ${props.theme === "light"
-        ? "var(--color-light)"
-        : "var(--color-dark)"};
-      color: ${props.theme === "light"
-        ? "var(--color-dark)"
-        : "var(--color-light)"};
+      background-color: ${props.theme === 'light' ? 'var(--color-light)' : 'var(--color-dark)'};
+      color: ${props.theme === 'light' ? 'var(--color-dark)' : 'var(--color-light)'};
     }
-  `,
-);
+  `
+)

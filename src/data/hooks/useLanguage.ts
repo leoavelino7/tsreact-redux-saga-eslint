@@ -1,13 +1,12 @@
-import { useLocalStorage } from './useLocalStorage';
+import { localesMap } from '~/ui/locales'
 
-import { messages } from './../../ui/locales';
+import { useLocalStorage } from '~/data/hooks/useLocalStorage'
 
-const messageLanguage: any = messages
+const INITIAL_POSITION = 0
+const defaultLanguage: string = navigator.language.split(/[-_]/)[INITIAL_POSITION]
 
-const defaultLanguage: string = navigator.language.split(/[-_]/)[0];
-
-export function useLanguage(){
+export function useLanguage() {
   const [language, setLanguage] = useLocalStorage('@app/language', defaultLanguage)
-  
-  return [language, setLanguage, messageLanguage[language]];
+
+  return [language, setLanguage, localesMap.get(language) || localesMap.get('pt')]
 }

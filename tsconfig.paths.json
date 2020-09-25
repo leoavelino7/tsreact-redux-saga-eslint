@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/data/*": ["./src/data/*"],
+      "~/ui/*": ["./src/ui/*"]
+    }
+  }
+}

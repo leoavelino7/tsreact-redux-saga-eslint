@@ -6,6 +6,6 @@ import { AuthTypes } from './auth/types'
 export default function* rootSaga() {
   return yield all([
     takeLatest(AuthTypes.SIGN_IN, signIn),
-    takeLatest(AuthTypes.VALIDATE_TOKEN, validateToken)
+    takeLatest(AuthTypes.VALIDATE_TOKEN, validateToken),
   ])
 }

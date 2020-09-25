@@ -1,5 +1,5 @@
-import lightTheme from '../../ui/styles/lightTheme'
-import darkTheme from '../../ui/styles/darkTheme'
+import darkTheme from '~/ui/styles/darkTheme'
+import lightTheme from '~/ui/styles/lightTheme'
 
 const themes = {
   lightTheme,
@@ -7,7 +7,7 @@ const themes = {
 }
 
 export function useTheme(theme: string) {
-  switch(theme){
+  switch (theme) {
     case 'dark':
       return themes.darkTheme
 

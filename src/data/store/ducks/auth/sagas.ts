@@ -1,26 +1,33 @@
 import { call, put } from 'redux-saga/effects'
 
-import { loadSuccess, loadFailure, signOut } from './actions'
+import { loadFailure, loadSuccess, signOut } from './actions'
 
 /**
  * Mocks
  */
+const TIME_TO_RUN_MOCKS = 200
+
 function mockSignIn() {
   return new Promise((resolve) => {
-    setTimeout(() => resolve({
-      data: {
-        token: 'wertyuiop', 
-        configurations: [
-          { service: 'App1', rules: [{role: 'admin', rights: ['CAN_VIEW_HOME']}]}
-        ]
-      }
-    }), 2000)
+    setTimeout(() => {
+      resolve({
+        data: {
+          token: 'wertyuiop',
+          configurations: [
+            {
+              service: 'App1',
+              rules: [{ role: 'admin', rights: ['CAN_VIEW_HOME'] }],
+            },
+          ],
+        },
+      })
+    }, TIME_TO_RUN_MOCKS)
   })
 }
 
 function mockCheckToken() {
   return new Promise((resolve) => {
-    setTimeout(() => resolve({data: {valid: true }}), 1000)
+    setTimeout(() => resolve({ data: { valid: true } }), TIME_TO_RUN_MOCKS)
   })
 }
 
@@ -41,7 +48,7 @@ export function* validateToken() {
   try {
     const response = yield call(mockCheckToken)
 
-    if(!response?.data?.valid) {
+    if (!response?.data?.valid) {
       throw new Error('Invalid token')
     }
   } catch (err) {
