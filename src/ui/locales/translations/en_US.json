@@ -1,3 +1,8 @@
 {
-  "HI": "hello"
+  "HI": "hi",
+  "FORM_LOGIN_TITLE": "Acessar conta",
+  "FORM_LOGIN_TITLE_USERNAME": "Usuário",
+  "FORM_LOGIN_TITLE_PASSWORD": "Senha",
+  "FORM_LOGIN_TITLE_BUTTON_LOGIN": "Entrar",
+  "FORM_LOGIN_TITLE_BUTTON_FORGET_PASSWORD": "Esqueci minha senha"
 }

@@ -5,7 +5,7 @@ import { loadFailure, loadSuccess, signOut } from './actions'
 /**
  * Mocks
  */
-const TIME_TO_RUN_MOCKS = 200
+const TIME_TO_RUN_MOCKS = 5000
 
 function mockSignIn() {
   return new Promise((resolve) => {

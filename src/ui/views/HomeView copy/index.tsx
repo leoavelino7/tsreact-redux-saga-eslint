@@ -1,5 +1,5 @@
 import React from 'react'
-import { useIntl } from 'react-intl'
+import { useIntl, FormattedDate } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
@@ -12,7 +12,7 @@ import * as AuthActions from '~/data/store/ducks/auth/actions'
 
 import { IRouteProps } from '~/ui/routes'
 
-import { Navbar } from '~/ui/components/Navbar'
+import { Sample } from '~/ui/components/Sample'
 import { ThemeButton } from '~/ui/components/ThemeButton'
 
 dotenv.config({
@@ -25,31 +25,31 @@ export const HomeView = ({ changeLanguage }: IRouteProps) => {
   const intl = useIntl()
 
   const token = useSelector((state: ApplicationState) => {
-    return decryptionWithCryptoJS(process.env.REACT_APP_STORAGE_KEY, state.auth.token)
+    decryptionWithCryptoJS(process.env.REACT_APP_STORAGE_KEY, state.auth.token)
   })
 
-  const handleSelectItem = (href: string) => {
-    if (href === '/') {
-      handleSignOut()
-    } else {
-      history.push(href)
-    }
-  }
-
-  const handleSignOut = () => {
+  function handleSignOut() {
     dispatch(AuthActions.signOut())
     history.push('/')
   }
 
   return (
     <div>
-      <Navbar onHandleSelectItem={handleSelectItem} />
+      <ThemeButton />
+      <Sample />
+
       <button onClick={() => changeLanguage('pt')}>Mudar para pt</button>
       <button onClick={() => changeLanguage('en')}>Mudar para en</button>
+      <br />
+      <br />
+      <span title={intl.formatDate('12/06/1999')}>
+        <FormattedDate value={'12/06/1999'} />
+      </span>
 
       <h1>{intl.messages.HI}</h1>
       <h1>Token {token}</h1>
-      <ThemeButton />
+      <br />
+      <button onClick={handleSignOut}>Sair</button>
     </div>
   )
 }
